@@ -6,6 +6,7 @@ const port = 3003;
 
 // Settings
 app.set('port', port);
+app.set('json spaces', 2);
 
 
 // Middlewares
@@ -15,7 +16,7 @@ app.use(express.json());
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send({'Title': 'nota1'});
 });
 
 app.listen(app.get('port'), () => {
