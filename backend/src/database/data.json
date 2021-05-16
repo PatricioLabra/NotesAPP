@@ -1,0 +1,19 @@
+{
+  "database_info": {
+    "last_id": 2
+  },
+  "notes": [
+    {
+      "title": "Nota 1",
+      "description": "Primera nota",
+      "state": "open",
+      "id": 1
+    },
+    {
+      "title": "Nota 2",
+      "description": "Segunda nota",
+      "state": "process",
+      "id": 2
+    }
+  ]
+}
