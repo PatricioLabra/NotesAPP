@@ -9,19 +9,27 @@ export class Db {
   constructor() {}
 
   async loadNotes() {
-    const dataString: string = await promises.readFile('./data.json', 'utf-8');
-    const data: any = JSON.parse(dataString);
+    let dataString: string;
+    let data: any;
 
-    this.last_id = data.database_info.last_id;
-    data.notes.forEach((note: Note) => {
-      switch (note.state) {
-        case 'process': note.state = State.PROCESS; break;
-        case 'open': note.state = State.OPEN; break;
-        case 'close': note.state = State.CLOSE; break;
-      }
-    });
+    // Si es primera vez que correra el server, no habra archivo data.json y saltara al catch
+    try {
+      dataString = await promises.readFile('./data.json', 'utf-8');
+      data = JSON.parse(dataString);
 
-    this.notes = data.notes as Array<Note>;
+      this.last_id = data.database_info.last_id;
+      data.notes.forEach((note: Note) => {
+        switch (note.state) {
+          case 'process': note.state = State.PROCESS; break;
+          case 'open': note.state = State.OPEN; break;
+          case 'close': note.state = State.CLOSE; break;
+        }
+      });
+
+      this.notes = data.notes as Array<Note>;
+    } catch (error) {
+      await this.saveNotes();
+    } 
   }
 
   async saveNotes() {
