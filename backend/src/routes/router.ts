@@ -11,9 +11,9 @@ router.get('/', (req, res) => {
   res.send(db.notes);
 });
 
-router.post('/agregar_nota', (req, res) => {
+router.post('/agregar_nota', async (req, res) => {
   const newNote: Note = req.body as Note;
-  const newId = db.addNote(newNote);
+  const newId = await db.addNote(newNote);
   let isValid = true;
 
   switch (newNote.state) {
@@ -30,7 +30,6 @@ router.post('/agregar_nota', (req, res) => {
     res.status(400);
     res.send({"error": "state no valid", "state": newNote.state});
   }
-
 });
 
 router.post('/buscar_nota', (req, res) => {
@@ -50,4 +49,5 @@ export { router };
 
 async function initResources() {
   await db.loadNotes();
+  console.log(db.notes);
 }
