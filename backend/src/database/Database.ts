@@ -1,4 +1,5 @@
 import { Note } from './models/note';
+import { State } from './models/states';
 import data from './data.json';
 
 export class Db {
@@ -11,6 +12,14 @@ export class Db {
 
   loadNotes() {
     this.last_id = data.database_info.last_id;
+    data.notes.forEach(note => {
+      switch (note.state) {
+        case 'process': note.state = State.PROCESS; break;
+        case 'open': note.state = State.OPEN; break;
+        case 'close': note.state = State.CLOSE; break;
+      }
+    });
+
     this.notes = data.notes as Array<Note>;
   }
 
