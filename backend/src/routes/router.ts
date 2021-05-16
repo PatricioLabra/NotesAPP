@@ -31,4 +31,17 @@ router.post('/agregar_nota', (req, res) => {
 
 });
 
+router.post('/buscar_nota', (req, res) => {
+  const idSearched: number = req.body.id;
+  const noteSearched: Note | null = db.searchNote(idSearched);
+
+  if (noteSearched != null) {
+    res.status(200);
+    res.send(noteSearched);
+  } else {
+    res.status(404);
+    res.send({"error": "note not found", "id": idSearched});
+  }
+});
+
 export { router };
