@@ -36,20 +36,16 @@ export class Db {
     await promises.writeFile('./data.json', dataString);
   }
 
-  async addNote(newNote: Note) {
+  addNote(newNote: Note) {
     this.last_id++;
     newNote.id = this.last_id;
     this.notes.push(newNote);
 
-    await this.saveNotes();
-
     return this.last_id;
   }
 
-  async removeNote(idNote: number) {
+  removeNote(idNote: number) {
     this.notes = this.notes.filter(note => note.id != idNote);
-
-    await this.saveNotes();
   }
 
   searchNote(idNote: number) {
@@ -60,13 +56,11 @@ export class Db {
       return null;
   }
 
-  async updateNote(idNote: number , updatedNote: Note) {
+  updateNote(idNote: number , updatedNote: Note) {
     const index = this.searchIndexNote(idNote);
 
     if (index != null)
       this.notes[index] = updatedNote;
-
-    await this.saveNotes();
   }
 
   private searchIndexNote(idNote: number) {

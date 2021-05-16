@@ -24,6 +24,8 @@ router.post('/agregar_nota', async (req, res) => {
   }
 
   if (isValid) {
+    await db.saveNotes();
+
     res.status(200);
     res.send({"new_id_created": newId});
   } else {
