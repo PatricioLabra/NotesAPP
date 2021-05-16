@@ -49,5 +49,4 @@ export { router };
 
 async function initResources() {
   await db.loadNotes();
-  console.log(db.notes);
 }

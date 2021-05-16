@@ -8,9 +8,6 @@ export class Db {
 
   constructor() {}
 
-  /**
-   * Carga las notas del archivo json data
-   */
   async loadNotes() {
     const dataString: string = await promises.readFile('./data.json', 'utf-8');
     const data: any = JSON.parse(dataString);
@@ -27,9 +24,6 @@ export class Db {
     this.notes = data.notes as Array<Note>;
   }
 
-  /**
-   * Guarda las notas en el archivo json
-   */
   async saveNotes() {
     const data: any = {
       "database_info": {
