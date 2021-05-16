@@ -5,6 +5,8 @@ import { Note } from '../database/models/note';
 const db = new Db();
 const router = Router();
 
+initResources();
+
 router.get('/', (req, res) => {
   res.send(db.notes);
 });
@@ -45,3 +47,7 @@ router.post('/buscar_nota', (req, res) => {
 });
 
 export { router };
+
+async function initResources() {
+  await db.loadNotes();
+}
