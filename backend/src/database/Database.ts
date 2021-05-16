@@ -27,6 +27,8 @@ export class Db {
     this.last_id++;
     newNote.id = this.last_id;
     this.notes.push(newNote);
+
+    return this.last_id;
   }
 
   removeNote(idNote: number) {
@@ -41,7 +43,7 @@ export class Db {
       return null;
   }
 
-  updateNote(idNote:number , updatedNote: Note) {
+  updateNote(idNote: number , updatedNote: Note) {
     const index = this.searchIndexNote(idNote);
 
     if (index != null)
