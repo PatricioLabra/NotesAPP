@@ -44,21 +44,22 @@ router.post('/buscar_nota', (req, res) => {
   }
 });
 
-router.delete('/eliminar_nota', (req, res)=>{
-  const idDelete:number = req.body.id;
+router.delete('/eliminar_nota', (req, res) => {
+  const idDelete: number = req.body.id;
 
   if (idDelete != null) {
-    if(db.searchNote(idDelete)!= null){
+    if (db.searchNote(idDelete) != null) {
       db.removeNote(idDelete);
       res.status(200);
-      res.send(true);  //le agregué ese true para el postman, ya que no me mandaba nada de vuelta y se quedaba buscando respuesta. Si quieres, lo dejamos.
-    }else{
+      res.send(true);  
+    } else {
       res.status(404);
       res.send({"error": "note not found", "id": idDelete});
     }
-  }else{
+  } else {
     res.status(400);
-    res.send({"error": "id no valid", "id": idDelete});
+    res.send({"error": "id is not valid", "id": idDelete});
   }
 });
+
 export { router };
