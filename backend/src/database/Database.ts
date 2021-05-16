@@ -32,7 +32,9 @@ export class Db {
    */
   async saveNotes() {
     const data: any = {
-      "database_info": this.last_id,
+      "database_info": {
+        "last_id": this.last_id
+      },
       "notes": this.notes
     };
 
