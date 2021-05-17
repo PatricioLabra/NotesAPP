@@ -47,6 +47,24 @@ router.post('/buscar_nota', (req, res) => {
   }
 });
 
+router.delete('/eliminar_nota', (req, res) => {
+  const idDelete: number = req.body.id;
+
+  if (idDelete != null) {
+    if (db.searchNote(idDelete) != null) {
+      db.removeNote(idDelete);
+      res.status(200);
+      res.send(true);  
+    } else {
+      res.status(404);
+      res.send({"error": "note not found", "id": idDelete});
+    }
+  } else {
+    res.status(400);
+    res.send({"error": "id is not valid", "id": idDelete});
+  }
+});
+
 export { router };
 
 async function initResources() {
