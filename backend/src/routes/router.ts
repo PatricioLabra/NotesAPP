@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
 router.post('/agregar_nota', async (req, res) => {
   const newNote: Note = req.body as Note;
-  const newId = await db.addNote(newNote);
+  const newId = db.addNote(newNote);
   let isValid = true;
 
   switch (newNote.state) {
