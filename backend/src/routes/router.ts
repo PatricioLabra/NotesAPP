@@ -5,11 +5,13 @@ import { Note } from '../database/models/note';
 const db = new Db();
 const router = Router();
 
+initResources();
+
 router.get('/', (req, res) => {
   res.send(db.notes);
 });
 
-router.post('/agregar_nota', (req, res) => {
+router.post('/agregar_nota', async (req, res) => {
   const newNote: Note = req.body as Note;
   const newId = db.addNote(newNote);
   let isValid = true;
@@ -22,13 +24,14 @@ router.post('/agregar_nota', (req, res) => {
   }
 
   if (isValid) {
+    await db.saveNotes();
+
     res.status(200);
     res.send({"new_id_created": newId});
   } else {
     res.status(400);
     res.send({"error": "state no valid", "state": newNote.state});
   }
-
 });
 
 router.post('/buscar_nota', (req, res) => {
@@ -62,25 +65,8 @@ router.delete('/eliminar_nota', (req, res) => {
   }
 });
 
-router.put('/modificar_nota', (req, res) => {
-  const id: number = parseInt(req.params.id);
-  const {title, description, state} = req.body;
-
-  let  updateNote: Note = {title, description, state,id};
-
-  if (id && updateNote){
-    if(db.searchNote(id) != null){
-      db.updateNote(id,updateNote);
-      res.status(200);
-      res.send(true);
-    } else {
-      res.status(404);
-      res.send({"error": "note not found", "id": id});
-    }
-  } else {
-    res.status(400);
-    res.send({"error": "invalid parameters","id": id, "tittle": title, "description": description, "state": state});
-  }
-});
-
 export { router };
+
+async function initResources() {
+  await db.loadNotes();
+}

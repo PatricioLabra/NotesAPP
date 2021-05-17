@@ -1,26 +1,47 @@
+import { promises } from 'fs';
 import { Note } from './models/note';
 import { State } from './models/states';
-import data from './data.json';
 
 export class Db {
   notes: Array<Note> = [];
   last_id: number = 0;
 
-  constructor() {
-    this.loadNotes();
+  constructor() {}
+
+  async loadNotes() {
+    let dataString: string;
+    let data: any;
+
+    // Si es primera vez que correra el server, no habra archivo data.json y saltara al catch
+    try {
+      dataString = await promises.readFile('./data.json', 'utf-8');
+      data = JSON.parse(dataString);
+
+      this.last_id = data.database_info.last_id;
+      data.notes.forEach((note: Note) => {
+        switch (note.state) {
+          case 'process': note.state = State.PROCESS; break;
+          case 'open': note.state = State.OPEN; break;
+          case 'close': note.state = State.CLOSE; break;
+        }
+      });
+
+      this.notes = data.notes as Array<Note>;
+    } catch (error) {
+      await this.saveNotes();
+    } 
   }
 
-  loadNotes() {
-    this.last_id = data.database_info.last_id;
-    data.notes.forEach(note => {
-      switch (note.state) {
-        case 'process': note.state = State.PROCESS; break;
-        case 'open': note.state = State.OPEN; break;
-        case 'close': note.state = State.CLOSE; break;
-      }
-    });
+  async saveNotes() {
+    const data: any = {
+      "database_info": {
+        "last_id": this.last_id
+      },
+      "notes": this.notes
+    };
 
-    this.notes = data.notes as Array<Note>;
+    const dataString: string = JSON.stringify(data);
+    await promises.writeFile('./data.json', dataString);
   }
 
   addNote(newNote: Note) {
