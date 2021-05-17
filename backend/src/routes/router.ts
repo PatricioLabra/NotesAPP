@@ -62,4 +62,25 @@ router.delete('/eliminar_nota', (req, res) => {
   }
 });
 
+router.put('/modificar_nota', (req, res) => {
+  const id: number = parseInt(req.params.id);
+  const {title, description, state} = req.body;
+
+  let  updateNote: Note = {title, description, state,id};
+
+  if (id && updateNote){
+    if(db.searchNote(id) != null){
+      db.updateNote(id,updateNote);
+      res.status(200);
+      res.send(true);
+    } else {
+      res.status(404);
+      res.send({"error": "note not found", "id": id});
+    }
+  } else {
+    res.status(400);
+    res.send({"error": "invalid parameters","id": id, "tittle": title, "description": description, "state": state});
+  }
+});
+
 export { router };
