@@ -73,11 +73,11 @@ router.delete('/eliminar_nota', async (req, res) => {
 });
 
 router.put('/modificar_nota', async (req, res) => {
-  const updateNote: Note = req.body;
+  const updatedNote: Note = req.body;
   let isValid = true;
 
-  if (updateNote.title && updateNote.description) {
-    switch (updateNote.state) {
+  if (updatedNote.title && updatedNote.description) {
+    switch (updatedNote.state) {
       case 'process':
       case 'open':
       case 'close': break;
@@ -85,23 +85,23 @@ router.put('/modificar_nota', async (req, res) => {
     }
   
     if (isValid ) {
-      if (db.searchNote(updateNote.id) != null) {
-        db.updateNote(updateNote.id, updateNote);
+      if (db.searchNote(updatedNote.id) != null) {
+        db.updateNote(updatedNote.id, updatedNote);
         await db.saveNotes();
   
         res.status(200);
         res.send(true);
       } else {
         res.status(404);
-        res.send({"error": "note not found", "id": updateNote.id});
+        res.send({"error": "note not found", "id": updatedNote.id});
       }
     } else {
       res.status(400);
-      res.send({"error": "state not valid", "state": updateNote.state});
+      res.send({"error": "state not valid", "state": updatedNote.state});
     }  
   } else {
     res.status(400);
-    res.send({"error":"title not valid or description not valid", "title": updateNote.title, "description": updateNote.description});
+    res.send({"error":"title not valid or description not valid", "title": updatedNote.title, "description": updatedNote.description});
   }
 });
 
