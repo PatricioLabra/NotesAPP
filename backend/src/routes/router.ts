@@ -17,39 +17,38 @@ router.get('/obtener_notas', (req, res) => {
 
 router.post('/agregar_nota', async (req, res) => {
   const newNote: Note = req.body as Note;
-  let isValid = true;
 
-  if (newNote.title && newNote.description) {
-    const newId = db.addNote(newNote);
-
-    isValid = validateState(newNote.state);
-
-    if (isValid) {
-      await db.saveNotes();
-
-      res.status(200);
-      res.send({"new_id_created": newId});
-    } else {
-      res.status(400);
-      res.send({"error": "state no valid", "state": newNote.state});
-    }
-  } else {
+  if (!newNote.title || !newNote.description) {
     res.status(400);
     res.send({"error":"title not valid or description not valid", "title": newNote.title, "description": newNote.description});
+    return ;
   }
+
+  if (!validateState(newNote.state)) {
+    res.status(400);
+    res.send({"error": "state no valid", "state": newNote.state});
+    return ;
+  }
+
+  const newId = db.addNote(newNote);
+  await db.saveNotes();
+
+  res.status(200);
+  res.send({"new_id_created": newId});
 });
 
 router.post('/buscar_nota', (req, res) => {
   const idSearched: number = req.body.id;
   const noteSearched: Note | null = db.searchNote(idSearched);
 
-  if (noteSearched != null) {
-    res.status(200);
-    res.send(noteSearched);
-  } else {
+  if (null == noteSearched) {
     res.status(404);
     res.send({"error": "note not found", "id": idSearched});
+    return ;
   }
+
+  res.status(200);
+  res.send(noteSearched);
 });
 
 router.delete('/eliminar_nota', async (req, res) => {
@@ -102,6 +101,7 @@ router.put('/modificar_nota', async (req, res) => {
 
 export { router };
 
+// Utils functions
 async function initResources() {
   await db.loadNotes();
 }
