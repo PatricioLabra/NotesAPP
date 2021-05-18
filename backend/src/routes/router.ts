@@ -67,7 +67,7 @@ router.post('/buscar_nota', (req, res) => {
   }
 
   res.status(200);
-  res.send({"data": noteSearched, "success": true});
+  res.send({"success": true, "data": noteSearched});
 });
 
 router.delete('/eliminar_nota', async (req, res) => {
@@ -101,7 +101,7 @@ router.delete('/eliminar_nota', async (req, res) => {
 });
 
 router.put('/modificar_nota', async (req, res) => {
-  const updatedNote: Note = req.body;
+  const updatedNote: Note = req.body as Note;
 
   if (!updatedNote.title || !updatedNote.description) {
     res.status(400);
