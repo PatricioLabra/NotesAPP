@@ -12,7 +12,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/obtener_notas', (req, res) => {
-  res.send(db.notes);
+  res.send({
+    "data": db.notes
+  });
 });
 
 router.post('/agregar_nota', async (req, res) => {
@@ -20,13 +22,20 @@ router.post('/agregar_nota', async (req, res) => {
 
   if (!newNote.title || !newNote.description) {
     res.status(400);
-    res.send({"error":"title not valid or description not valid", "title": newNote.title, "description": newNote.description});
+    res.send({
+      "error": "title not valid or description not valid",
+      "title": newNote.title,
+      "description": newNote.description
+    });
     return ;
   }
 
   if (!validateState(newNote.state)) {
     res.status(400);
-    res.send({"error": "state no valid", "state": newNote.state});
+    res.send({
+      "error": "state no valid",
+      "state": newNote.state
+    });
     return ;
   }
 
@@ -34,7 +43,9 @@ router.post('/agregar_nota', async (req, res) => {
   await db.saveNotes();
 
   res.status(200);
-  res.send({"new_id_created": newId});
+  res.send({
+    "new_id_created": newId
+  });
 });
 
 router.post('/buscar_nota', (req, res) => {
@@ -43,7 +54,10 @@ router.post('/buscar_nota', (req, res) => {
 
   if (null == noteSearched) {
     res.status(404);
-    res.send({"error": "note not found", "id": idSearched});
+    res.send({
+      "error": "note not found",
+      "id": idSearched
+    });
     return ;
   }
 
@@ -56,13 +70,19 @@ router.delete('/eliminar_nota', async (req, res) => {
 
   if (!idToDelete) {
     res.status(400);
-    res.send({"error": "id is not valid", "id": idToDelete});
+    res.send({
+      "error": "id is not valid",
+      "id": idToDelete
+    });
     return ;
   }
 
   if (db.searchNote(idToDelete) == null) {
     res.status(404);
-    res.send({"error": "note not found", "id": idToDelete});
+    res.send({
+      "error": "note not found",
+      "id": idToDelete
+    });
     return ;
   }
 
@@ -78,19 +98,29 @@ router.put('/modificar_nota', async (req, res) => {
 
   if (!updatedNote.title || !updatedNote.description) {
     res.status(400);
-    res.send({"error":"title not valid or description not valid", "title": updatedNote.title, "description": updatedNote.description});
+    res.send({
+      "error": "title not valid or description not valid",
+      "title": updatedNote.title,
+      "description": updatedNote.description
+    });
     return ;
   }
   
   if (!validateState(updatedNote.state)) {
     res.status(400);
-    res.send({"error": "state not valid", "state": updatedNote.state});
+    res.send({
+      "error": "state not valid",
+      "state": updatedNote.state
+    });
     return ;
   }
 
   if (db.searchNote(updatedNote.id) == null) {
     res.status(404);
-    res.send({"error": "note not found", "id": updatedNote.id});
+    res.send({
+      "error": "note not found",
+      "id": updatedNote.id
+    });
     return ;
   }
 
