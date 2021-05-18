@@ -7,6 +7,10 @@ const router = Router();
 
 initResources();
 
+router.get('/', (req, res) => {
+  res.send('Welcome to notes API!');
+});
+
 router.get('/obtener_notas', (req, res) => {
   res.send(db.notes);
 });
