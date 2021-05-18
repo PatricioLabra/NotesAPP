@@ -7,106 +7,152 @@ const router = Router();
 
 initResources();
 
+router.get('/', (req, res) => {
+  res.send('Welcome to notes API!');
+});
+
 router.get('/obtener_notas', (req, res) => {
-  res.send(db.notes);
+  res.send({
+    "success": true,
+    "data": db.notes
+  });
 });
 
 router.post('/agregar_nota', async (req, res) => {
   const newNote: Note = req.body as Note;
-  let isValid = true;
 
-  if (newNote.title && newNote.description) {
-    const newId = db.addNote(newNote);
-
-    switch (newNote.state) {
-      case 'process':
-      case 'open':
-      case 'close': break;
-      default : isValid = false; break;
-    }
-
-    if (isValid) {
-      await db.saveNotes();
-
-      res.status(200);
-      res.send({"new_id_created": newId});
-    } else {
-      res.status(400);
-      res.send({"error": "state no valid", "state": newNote.state});
-    }
-  } else {
+  if (!newNote.title || !newNote.description) {
     res.status(400);
-    res.send({"error":"title not valid or description not valid", "title": newNote.title, "description": newNote.description});
+    res.send({
+      "success": false,
+      "error": "title not valid or description not valid",
+      "title": newNote.title,
+      "description": newNote.description
+    });
+    return ;
   }
+
+  if (!validateState(newNote.state)) {
+    res.status(400);
+    res.send({
+      "success": false,
+      "error": "state no valid",
+      "state": newNote.state
+    });
+    return ;
+  }
+
+  const newId = db.addNote(newNote);
+  await db.saveNotes();
+
+  res.status(200);
+  res.send({
+    "success": true,
+    "new_id_created": newId
+  });
 });
 
 router.post('/buscar_nota', (req, res) => {
   const idSearched: number = req.body.id;
   const noteSearched: Note | null = db.searchNote(idSearched);
 
-  if (noteSearched != null) {
-    res.status(200);
-    res.send(noteSearched);
-  } else {
+  if (null == noteSearched) {
     res.status(404);
-    res.send({"error": "note not found", "id": idSearched});
+    res.send({
+      "success": false,
+      "error": "note not found",
+      "id": idSearched
+    });
+    return ;
   }
+
+  res.status(200);
+  res.send({"success": true, "data": noteSearched});
 });
 
 router.delete('/eliminar_nota', async (req, res) => {
-  const idDelete: number = req.body.id;
+  const idToDelete: number = req.body.id;
 
-  if (idDelete != null) {
-    if (db.searchNote(idDelete) != null) {
-      db.removeNote(idDelete);
-      await db.saveNotes();
-      res.status(200);
-      res.send(true);  
-    } else {
-      res.status(404);
-      res.send({"error": "note not found", "id": idDelete});
-    }
-  } else {
+  if (!idToDelete) {
     res.status(400);
-    res.send({"error": "id is not valid", "id": idDelete});
+    res.send({
+      "success": false,
+      "error": "id is not valid",
+      "id": idToDelete
+    });
+    return ;
   }
+
+  if (db.searchNote(idToDelete) == null) {
+    res.status(404);
+    res.send({
+      "success": false,
+      "error": "note not found",
+      "id": idToDelete
+    });
+    return ;
+  }
+
+  db.removeNote(idToDelete);
+  await db.saveNotes();
+
+  res.status(200);
+  res.send({"success": true});  
 });
 
 router.put('/modificar_nota', async (req, res) => {
-  const updatedNote: Note = req.body;
-  let isValid = true;
+  const updatedNote: Note = req.body as Note;
 
-  if (updatedNote.title && updatedNote.description) {
-    switch (updatedNote.state) {
-      case 'process':
-      case 'open':
-      case 'close': break;
-      default : isValid = false; break;
-    }
-  
-    if (isValid ) {
-      if (db.searchNote(updatedNote.id) != null) {
-        db.updateNote(updatedNote.id, updatedNote);
-        await db.saveNotes();
-  
-        res.status(200);
-        res.send(true);
-      } else {
-        res.status(404);
-        res.send({"error": "note not found", "id": updatedNote.id});
-      }
-    } else {
-      res.status(400);
-      res.send({"error": "state not valid", "state": updatedNote.state});
-    }  
-  } else {
+  if (!updatedNote.title || !updatedNote.description) {
     res.status(400);
-    res.send({"error":"title not valid or description not valid", "title": updatedNote.title, "description": updatedNote.description});
+    res.send({
+      "success": false,
+      "error": "title not valid or description not valid",
+      "title": updatedNote.title,
+      "description": updatedNote.description
+    });
+    return ;
   }
+  
+  if (!validateState(updatedNote.state)) {
+    res.status(400);
+    res.send({
+      "success": false,
+      "error": "state not valid",
+      "state": updatedNote.state
+    });
+    return ;
+  }
+
+  if (db.searchNote(updatedNote.id) == null) {
+    res.status(404);
+    res.send({
+      "success": false,
+      "error": "note not found",
+      "id": updatedNote.id
+    });
+    return ;
+  }
+
+  db.updateNote(updatedNote.id, updatedNote);
+  await db.saveNotes();
+
+  res.status(200);
+  res.send({"sucess": true});
 });
 
 export { router };
 
+// Utils functions
 async function initResources() {
   await db.loadNotes();
+}
+
+function validateState(state: string) {
+  switch (state) {
+    case 'process':
+    case 'open':
+    case 'close': return true;
+    default : return false;
+  }
 }
