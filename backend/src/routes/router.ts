@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
 
 router.get('/obtener_notas', (req, res) => {
   res.send({
+    "success": true,
     "data": db.notes
   });
 });
@@ -23,6 +24,7 @@ router.post('/agregar_nota', async (req, res) => {
   if (!newNote.title || !newNote.description) {
     res.status(400);
     res.send({
+      "success": false,
       "error": "title not valid or description not valid",
       "title": newNote.title,
       "description": newNote.description
@@ -33,6 +35,7 @@ router.post('/agregar_nota', async (req, res) => {
   if (!validateState(newNote.state)) {
     res.status(400);
     res.send({
+      "success": false,
       "error": "state no valid",
       "state": newNote.state
     });
@@ -44,6 +47,7 @@ router.post('/agregar_nota', async (req, res) => {
 
   res.status(200);
   res.send({
+    "success": true,
     "new_id_created": newId
   });
 });
@@ -55,6 +59,7 @@ router.post('/buscar_nota', (req, res) => {
   if (null == noteSearched) {
     res.status(404);
     res.send({
+      "success": false,
       "error": "note not found",
       "id": idSearched
     });
@@ -62,7 +67,7 @@ router.post('/buscar_nota', (req, res) => {
   }
 
   res.status(200);
-  res.send(noteSearched);
+  res.send({"data": noteSearched, "success": true});
 });
 
 router.delete('/eliminar_nota', async (req, res) => {
@@ -71,6 +76,7 @@ router.delete('/eliminar_nota', async (req, res) => {
   if (!idToDelete) {
     res.status(400);
     res.send({
+      "success": false,
       "error": "id is not valid",
       "id": idToDelete
     });
@@ -80,6 +86,7 @@ router.delete('/eliminar_nota', async (req, res) => {
   if (db.searchNote(idToDelete) == null) {
     res.status(404);
     res.send({
+      "success": false,
       "error": "note not found",
       "id": idToDelete
     });
@@ -90,7 +97,7 @@ router.delete('/eliminar_nota', async (req, res) => {
   await db.saveNotes();
 
   res.status(200);
-  res.send(true);  
+  res.send({"success": true});  
 });
 
 router.put('/modificar_nota', async (req, res) => {
@@ -99,6 +106,7 @@ router.put('/modificar_nota', async (req, res) => {
   if (!updatedNote.title || !updatedNote.description) {
     res.status(400);
     res.send({
+      "success": false,
       "error": "title not valid or description not valid",
       "title": updatedNote.title,
       "description": updatedNote.description
@@ -109,6 +117,7 @@ router.put('/modificar_nota', async (req, res) => {
   if (!validateState(updatedNote.state)) {
     res.status(400);
     res.send({
+      "success": false,
       "error": "state not valid",
       "state": updatedNote.state
     });
@@ -118,6 +127,7 @@ router.put('/modificar_nota', async (req, res) => {
   if (db.searchNote(updatedNote.id) == null) {
     res.status(404);
     res.send({
+      "success": false,
       "error": "note not found",
       "id": updatedNote.id
     });
@@ -128,7 +138,7 @@ router.put('/modificar_nota', async (req, res) => {
   await db.saveNotes();
 
   res.status(200);
-  res.send(true);
+  res.send({"sucess": true});
 });
 
 export { router };
