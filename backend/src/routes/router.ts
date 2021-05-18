@@ -22,12 +22,7 @@ router.post('/agregar_nota', async (req, res) => {
   if (newNote.title && newNote.description) {
     const newId = db.addNote(newNote);
 
-    switch (newNote.state) {
-      case 'process':
-      case 'open':
-      case 'close': break;
-      default : isValid = false; break;
-    }
+    isValid = validateState(newNote.state);
 
     if (isValid) {
       await db.saveNotes();
@@ -64,6 +59,7 @@ router.delete('/eliminar_nota', async (req, res) => {
     if (db.searchNote(idDelete) != null) {
       db.removeNote(idDelete);
       await db.saveNotes();
+
       res.status(200);
       res.send(true);  
     } else {
@@ -78,39 +74,43 @@ router.delete('/eliminar_nota', async (req, res) => {
 
 router.put('/modificar_nota', async (req, res) => {
   const updatedNote: Note = req.body;
-  let isValid = true;
 
-  if (updatedNote.title && updatedNote.description) {
-    switch (updatedNote.state) {
-      case 'process':
-      case 'open':
-      case 'close': break;
-      default : isValid = false; break;
-    }
-  
-    if (isValid ) {
-      if (db.searchNote(updatedNote.id) != null) {
-        db.updateNote(updatedNote.id, updatedNote);
-        await db.saveNotes();
-  
-        res.status(200);
-        res.send(true);
-      } else {
-        res.status(404);
-        res.send({"error": "note not found", "id": updatedNote.id});
-      }
-    } else {
-      res.status(400);
-      res.send({"error": "state not valid", "state": updatedNote.state});
-    }  
-  } else {
+  if (!updatedNote.title || !updatedNote.description) {
     res.status(400);
     res.send({"error":"title not valid or description not valid", "title": updatedNote.title, "description": updatedNote.description});
+    return ;
   }
+  
+  if (!validateState(updatedNote.state)) {
+    res.status(400);
+    res.send({"error": "state not valid", "state": updatedNote.state});
+    return ;
+  }
+
+  if (db.searchNote(updatedNote.id) == null) {
+    res.status(404);
+    res.send({"error": "note not found", "id": updatedNote.id});
+    return ;
+  }
+
+  db.updateNote(updatedNote.id, updatedNote);
+  await db.saveNotes();
+
+  res.status(200);
+  res.send(true);
 });
 
 export { router };
 
 async function initResources() {
   await db.loadNotes();
+}
+
+function validateState(state: string) {
+  switch (state) {
+    case 'process':
+    case 'open':
+    case 'close': return true;
+    default : return false;
+  }
 }
