@@ -13,8 +13,8 @@ export class NotesManagerService {
 
   constructor(private http: HttpClient) { }
 
-  getListNotes() {
-    const path = this.API_URL + 'obtener_notas';
-    return this.http.get<Note[]>(path);
+  addNote(newNote: Note) {
+    const path = this.API_URL + 'agregar_nota';
+    return this.http.post(path, newNote);
   }
 }
