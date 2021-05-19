@@ -13,9 +13,9 @@ export class AppComponent {
   constructor(private notesManager: NotesManagerService) {}
 
   listarNotas() {
-    this.notesManager.obtenerNotas()
-    .subscribe((listaNota: Note[]) => {
-      console.log(listaNota);
+    this.notesManager.getListNotes()
+    .subscribe(res => {
+      console.log(res);
     });
   }
 }
