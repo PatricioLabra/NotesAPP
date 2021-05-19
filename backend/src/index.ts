@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+import cors, { CorsOptions } from "cors";
 
 // My imports
 import { router } from './routes/router';
@@ -16,6 +17,7 @@ app.set('json spaces', 2);
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use(router);
