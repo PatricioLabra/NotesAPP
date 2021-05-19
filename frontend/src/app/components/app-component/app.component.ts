@@ -13,7 +13,8 @@ export class AppComponent {
 
   constructor(private notesManager: NotesManagerService) {}
 
-  addNewNote() {
+  // Just for debuging, remove later
+  testService() {
     const note: Note = {
       "title": "Agregar Nota",
       "description": "Probar la conexion con la api",
@@ -21,8 +22,12 @@ export class AppComponent {
       "id": 0
     };
 
-    this.notesManager.addNote(note)
-    .subscribe(res => {
+
+    // Change just the function after "this.notesManager."
+    const obs = this.notesManager.addNote(note)
+
+
+    obs.subscribe(res => {
       console.log(res);
     });
   }
