@@ -24,7 +24,9 @@ export class AppComponent {
 
 
     // Change just the function after "this.notesManager."
-    const obs = this.notesManager.addNote(note)
+    //const obs = this.notesManager.addNote(note) //<--- ready
+    const obs = this.notesManager.getNotes()
+
 
 
     obs.subscribe(res => {

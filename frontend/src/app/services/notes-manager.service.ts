@@ -17,4 +17,9 @@ export class NotesManagerService {
     const path = this.API_URL + 'agregar_nota';
     return this.http.post(path, newNote);
   }
+
+  getNotes(){
+    const path = this.API_URL + 'obtener_notas';
+    return this.http.get(path);
+  }
 }
