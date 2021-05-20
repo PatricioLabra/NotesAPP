@@ -1,5 +1,5 @@
 export enum State {
-  PROCESS='process',
+  IN_PROCESS='in_process',
   OPEN='open',
   CLOSE='close',
 }

@@ -20,7 +20,7 @@ export class Db {
       this.last_id = data.database_info.last_id;
       data.notes.forEach((note: Note) => {
         switch (note.state) {
-          case 'process': note.state = State.PROCESS; break;
+          case 'in_process': note.state = State.IN_PROCESS; break;
           case 'open': note.state = State.OPEN; break;
           case 'close': note.state = State.CLOSE; break;
         }
