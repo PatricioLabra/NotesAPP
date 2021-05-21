@@ -1,17 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-
-import { State } from '@models/states';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-note',
   templateUrl: './form-note.component.html',
   styleUrls: ['./form-note.component.scss']
 })
-export class FormNoteComponent implements OnInit {
+export class FormNoteComponent {
 
-  constructor() { }
+  formNote: FormGroup;
 
-  ngOnInit() {
+  constructor(private _fb: FormBuilder) {
+    this.formNote = this._fb.group({
+      title: [''],
+      state: [''],
+      description: ['']
+    });
   }
 
+  onSubmit() {
+    // TODO: Validate data maybe, parse state (string to State)
+    console.log(this.formNote.getRawValue());
+  }
 }

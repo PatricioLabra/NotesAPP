@@ -1,16 +1,17 @@
 <p>form-note works!</p>
 
-<form>
-<input type="text">
+<form [formGroup]="formNote" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="title">
 
-<select >
-  <option value="">Select state</option>
-  <option value="open">Open</option>
-  <option value="in_process">In Process</option>
-  <option value="close">Close</option>
-</select>
+  <select formControlName="state">
+    <option value="">Select state</option>
+    <option value="open">Open</option>
+    <option value="in_process">In Process</option>
+    <option value="close">Close</option>
+  </select>
 
-<Textarea>
+  <!--TODO: change input to textArea (From angular material)-->
+  <input type="text" formControlName="description">
 
-</Textarea>
+  <button type="submit" [disabled]="!formNote.valid">Submit</button>
 </form>
