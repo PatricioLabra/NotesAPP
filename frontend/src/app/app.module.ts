@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '@components/app-component/app.component';
 import { FormNoteComponent } from './components/form-note/form-note.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
+import { ListNotesComponent } from '@components/list-notes/list-notes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormNoteComponent,
     CreateNoteComponent,
+    ListNotesComponent,
   ],
   imports: [
     BrowserModule,
