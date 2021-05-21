@@ -150,7 +150,7 @@ async function initResources() {
 
 function validateState(state: string) {
   switch (state) {
-    case 'process':
+    case 'in_process':
     case 'open':
     case 'close': return true;
     default : return false;
