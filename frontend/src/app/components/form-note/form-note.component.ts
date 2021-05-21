@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-note',
@@ -12,9 +12,9 @@ export class FormNoteComponent {
 
   constructor(private _fb: FormBuilder) {
     this.formNote = this._fb.group({
-      title: [''],
-      state: [''],
-      description: ['']
+      title: ['', Validators.required],
+      state: ['', Validators.required],
+      description: ['', Validators.required]
     });
   }
 
