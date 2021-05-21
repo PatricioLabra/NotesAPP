@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Note } from '@models/note';
@@ -24,6 +24,9 @@ export class FormNoteComponent implements OnInit {
   @Input()
   id: number = 0;
 
+  @Output()
+  noteEntered = new EventEmitter<Note>();
+
   constructor(private _fb: FormBuilder) {}
 
   ngOnInit() {
@@ -36,8 +39,8 @@ export class FormNoteComponent implements OnInit {
 
   onSubmit() {
     // TODO: Validate data maybe, parse state (string to State)
-
     const note: Note = {...this.formNote.getRawValue(), 'id': this.id};
     console.log(note);
+    this.noteEntered.emit(note);
   }
 }
