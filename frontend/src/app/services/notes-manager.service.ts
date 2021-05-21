@@ -22,6 +22,11 @@ export class NotesManagerService {
     return this.http.get(path);
   }
 
+  searchNote(id: number) {
+    const path = this.API_URL + 'buscar_nota';
+    return this.http.post(path, {'id': id});
+  }
+
   updateNote(updatedNote: Note){
     const path = this.API_URL + 'modificar_nota';
     return this.http.put(path, updatedNote);
