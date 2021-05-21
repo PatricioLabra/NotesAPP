@@ -8,6 +8,7 @@ import { AppComponent } from '@components/app-component/app.component';
 import { FormNoteComponent } from './components/form-note/form-note.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { ListNotesComponent } from '@components/list-notes/list-notes.component';
+import { UpdateNoteComponent } from './components/update-note/update-note.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ListNotesComponent } from '@components/list-notes/list-notes.component'
     FormNoteComponent,
     CreateNoteComponent,
     ListNotesComponent,
+    UpdateNoteComponent,
   ],
   imports: [
     BrowserModule,
