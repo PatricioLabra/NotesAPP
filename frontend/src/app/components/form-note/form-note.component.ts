@@ -25,7 +25,7 @@ export class FormNoteComponent implements OnInit {
   id: number = 0;
 
   @Input()
-  textSubmitButton: string = 'Create';
+  textSubmitButton: string = 'Submit';
 
   @Output()
   noteEntered = new EventEmitter<Note>();
