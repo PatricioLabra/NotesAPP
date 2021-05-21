@@ -70,8 +70,8 @@ router.post('/buscar_nota', (req, res) => {
   res.send({"success": true, "data": noteSearched});
 });
 
-router.delete('/eliminar_nota', async (req, res) => {
-  const idToDelete: number = req.body.id;
+router.delete('/eliminar_nota/:idNote', async (req, res) => {
+  const idToDelete: number = parseInt(req.params.idNote);
 
   if (!idToDelete) {
     res.status(400);
