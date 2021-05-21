@@ -43,4 +43,9 @@ export class ListNotesComponent implements OnInit {
       });
     });
   }
+
+  deleteNote(note: Note) {
+    //this.noteManager.removeNote(idNote);
+    console.log(note.id, note.state);
+  }
 }

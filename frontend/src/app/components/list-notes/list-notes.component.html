@@ -3,20 +3,32 @@
 <div>
   <p>Open</p>
   <ul>
-    <li *ngFor="let note of open_notes">{{ note.title }}</li>
+    <li *ngFor="let note of open_notes">
+      {{ note.title }}
+      <button>Editar</button>
+      <button (click)="deleteNote(note)">Eliminar</button>
+    </li>
   </ul>
 </div>
 
 <div>
   <p>In Process</p>
   <ul>
-    <li *ngFor="let note of inprocess_notes">{{ note.title }}</li>
+    <li *ngFor="let note of inprocess_notes">
+      {{ note.title }}
+      <button>Editar</button>
+      <button (click)="deleteNote(note)">Eliminar</button>
+    </li>
   </ul>
 </div>
 
 <div>
   <p>Close</p>
   <ul>
-    <li *ngFor="let note of close_notes">{{ note.title }}</li>
+    <li *ngFor="let note of close_notes">
+      {{ note.title }}
+      <button>Editar</button>
+      <button (click)="deleteNote(note)">Eliminar</button>
+    </li>
   </ul>
 </div>
