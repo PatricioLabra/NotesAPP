@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Note } from '@models/note';
+
 @Component({
   selector: 'app-form-note',
   templateUrl: './form-note.component.html',
@@ -19,6 +21,9 @@ export class FormNoteComponent implements OnInit {
   @Input()
   description: string = '';
 
+  @Input()
+  id: number = 0;
+
   constructor(private _fb: FormBuilder) {}
 
   ngOnInit() {
@@ -31,6 +36,8 @@ export class FormNoteComponent implements OnInit {
 
   onSubmit() {
     // TODO: Validate data maybe, parse state (string to State)
-    console.log(this.formNote.getRawValue());
+
+    const note: Note = {...this.formNote.getRawValue(), 'id': this.id};
+    console.log(note);
   }
 }
