@@ -13,5 +13,5 @@
   <!--TODO: change input to textArea (From angular material)-->
   <input type="text" formControlName="description" required>
 
-  <button type="submit" [disabled]="!formNote.valid">Submit</button>
+  <button type="submit" [disabled]="!formNote.valid">{{ textSubmitButton }}</button>
 </form>
