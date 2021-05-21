@@ -22,4 +22,14 @@ export class NotesManagerService {
     const path = this.API_URL + 'obtener_notas';
     return this.http.get(path);
   }
+
+  updateNote(updatedNote: Note){
+    const path = this.API_URL + 'modificar_nota';
+    return this.http.put(path, updatedNote);
+  }
+
+  removeNote(idtoDelete: number){
+    const path = this.API_URL + `eliminar_nota/${idtoDelete}`;
+    return this.http.delete(path);
+  }
 }

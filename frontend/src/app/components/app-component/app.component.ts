@@ -16,16 +16,21 @@ export class AppComponent {
   // Just for debuging, remove later
   testService() {
     const note: Note = {
-      "title": "Agregar Nota",
-      "description": "Probar la conexion con la api",
-      "state": State.OPEN,
-      "id": 0
+      "title": "Nota modificada",
+      "description": "descripcion modificada ",
+      "state": State.CLOSE,
+      "id": 1
     };
 
+    const idtoDelete = 1;
+    
 
     // Change just the function after "this.notesManager."
     //const obs = this.notesManager.addNote(note) //<--- ready
-    const obs = this.notesManager.getNotes()
+    const obs = this.notesManager.getNotes() //<--- ready
+    //const obs = this.notesManager.updateNote(note) //<--- ready
+    //const obs = this.notesManager.removeNote(idtoDelete) //<--- ready
+
 
 
 
