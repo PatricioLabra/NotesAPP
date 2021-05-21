@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Note } from '@models/note';
-import { State } from '@models/states';
 
 @Injectable({
   providedIn: 'root'
