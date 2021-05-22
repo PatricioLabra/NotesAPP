@@ -1,5 +1,6 @@
+<p id="myNotes">Mis Notas</p>
 
-<div>
+<div id="notes">
   <p id="header">Open</p>
   <ul id="note">
     <li id="open"
@@ -9,7 +10,7 @@
         routerLink="/update-note/{{note.id}}"
         routerLinkActive="active"
       >{{ note.title }}</p>
-      <button (click)="deleteNote(note)">Eliminar</button>
+      <button (click)="deleteNote(note)">X</button>
       
       <p id="description">
         {{note.description}}</p>
@@ -17,7 +18,7 @@
   </ul>
 </div>
 
-<div>
+<div id="notes">
   <p id="header">In Process</p>
   <ul id="note">
     <li id="inProcess"
@@ -27,7 +28,7 @@
         routerLink="/update-note/{{note.id}}"
         routerLinkActive="active"
       >{{ note.title }}</p>
-      <button (click)="deleteNote(note)">Eliminar</button>
+      <button (click)="deleteNote(note)">X</button>
 
       <p id="description">
         {{note.description}}</p>
@@ -35,7 +36,7 @@
   </ul>
 </div>
 
-<div>
+<div id="notes">
   <p id="header">Close</p>
   <ul id="note">
     <li id="close"
@@ -45,10 +46,12 @@
         routerLink="/update-note/{{note.id}}"
         routerLinkActive="active"
       >{{ note.title }}</p>
-      <button (click)="deleteNote(note)">Eliminar</button>
+      <button (click)="deleteNote(note)">X</button>
 
       <p id="description">
         {{note.description}}</p>
     </li>
   </ul>
 </div>
+
+<p id="messageClic">Al dar clic sobre cada nota permitirá editar </p>
