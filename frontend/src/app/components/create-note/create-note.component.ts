@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Note } from '@models/note';
 
@@ -9,9 +10,10 @@ import { Note } from '@models/note';
 })
 export class CreateNoteComponent {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   processNewNote(newNote: Note) {
     console.log('from create note: ', newNote);
+    this.router.navigate(['list-notes']);
   }
 }

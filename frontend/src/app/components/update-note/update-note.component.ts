@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { NotesManagerService } from '@services/notes-manager.service';
 import { Note } from '@models/note';
@@ -17,6 +17,7 @@ export class UpdateNoteComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private notesManager: NotesManagerService
     ) {}
 
@@ -30,5 +31,6 @@ export class UpdateNoteComponent implements OnInit {
 
   processUpdatedNote(note: Note) {
     console.log(note);
+    this.router.navigate(['list-notes']);
   }
 }
