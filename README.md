@@ -4,6 +4,11 @@
 
 ## Backend
 
+Todas las configuraciones y comandos del backend se tienen que realizar en su carpeta
+```
+cd backend
+```
+
 ### 1. Instalación de dependencias
 Se instalarán todas las dependencias del backend, se realiza solo luego de clonar el proyecto
 ```
@@ -24,6 +29,11 @@ npm run serve
 ```
 
 ## Frontend
+
+Todas las configuraciones y comandos del frontend se tienen que realizar en su carpeta
+```
+cd frontend
+```
 
 ### 1. Instalación de dependencias
 Se instalarán todas las dependencias del frontend, se realiza solo luego de clonar el proyecto
