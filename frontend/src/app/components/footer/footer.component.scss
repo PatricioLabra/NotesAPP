@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+
+  .add-button {
+    align-self: center;
+    width: 20%;
+    border: 1px solid;
+  }
+}

@@ -23,6 +23,8 @@
 
 #title{
     font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
     margin-left: 2%;
 }
 #description{
@@ -68,4 +70,5 @@
 
 .note-body {
     display: flex;
+    padding: 10px;
 }
