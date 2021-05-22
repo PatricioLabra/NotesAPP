@@ -9,6 +9,7 @@ import { FormNoteComponent } from './components/form-note/form-note.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { ListNotesComponent } from '@components/list-notes/list-notes.component';
 import { UpdateNoteComponent } from './components/update-note/update-note.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UpdateNoteComponent } from './components/update-note/update-note.compon
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
