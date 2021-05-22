@@ -1,0 +1,62 @@
+#myNotes{
+    font: oblique 130% cursive;
+}
+#notes {
+    display: inline-table;
+    width: 31%; 
+    margin: 1%; 
+    font: oblique 100% cursive;
+}
+
+#header{
+    text-align: center;
+    font-weight: bold;
+}
+
+#note li{
+    list-style: none;
+    margin:5%;
+    border: 1px solid rgb(139, 0, 139);
+    background-size: auto auto;
+    
+}
+
+#title{
+    font-weight: bold;
+    margin-left: 2%;
+}
+#description{
+    margin-left:2%;
+    margin-right:2%;
+}
+button{
+    background-color: transparent;
+    border: none;
+    width: 1%;
+    height: 1%;
+    font: oblique 130% cursive;
+
+}
+#open{
+    
+    background-size: auto auto;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 4px, rgba(255, 1, 53, 0.64) 4px, rgba(255, 1, 53, 0.64) 5px );
+}
+
+#inProcess{
+    background-size: auto auto;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 4px, rgba(234, 255, 1, 1) 4px, rgba(234, 255, 1, 1) 5px );
+}
+
+#close{
+    background-size: auto auto;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 4px, rgba(1, 224, 255, 1) 4px, rgba(1, 224, 255, 1) 5px ); 
+}
+
+#messageClic{
+    width:18%;
+    font: oblique 130% cursive;
+}
