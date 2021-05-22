@@ -1,46 +1,54 @@
-<p>list-notes works!</p>
 
 <div>
-  <p>Open</p>
-  <ul>
-    <li
+  <p id="header">Open</p>
+  <ul id="note">
+    <li id="open"
       *ngFor="let note of open_notes"
     >
-      <p
+      <p id="title"
         routerLink="/update-note/{{note.id}}"
         routerLinkActive="active"
       >{{ note.title }}</p>
       <button (click)="deleteNote(note)">Eliminar</button>
+      
+      <p id="description">
+        {{note.description}}</p>
     </li>
   </ul>
 </div>
 
 <div>
-  <p>In Process</p>
-  <ul>
-    <li
+  <p id="header">In Process</p>
+  <ul id="note">
+    <li id="inProcess"
       *ngFor="let note of inprocess_notes"
     >
-      <p
+      <p id="title"
         routerLink="/update-note/{{note.id}}"
         routerLinkActive="active"
       >{{ note.title }}</p>
       <button (click)="deleteNote(note)">Eliminar</button>
+
+      <p id="description">
+        {{note.description}}</p>
     </li>
   </ul>
 </div>
 
 <div>
-  <p>Close</p>
-  <ul>
-    <li
+  <p id="header">Close</p>
+  <ul id="note">
+    <li id="close"
       *ngFor="let note of close_notes"
     >
-      <p
+      <p id="title"
         routerLink="/update-note/{{note.id}}"
         routerLinkActive="active"
       >{{ note.title }}</p>
       <button (click)="deleteNote(note)">Eliminar</button>
+
+      <p id="description">
+        {{note.description}}</p>
     </li>
   </ul>
 </div>
