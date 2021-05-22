@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesManagerService } from '@services/notes-manager.service';
-import { Router } from '@angular/router';
 
 import { Note } from '@models/note';
 import { State } from '@models/states';
@@ -18,7 +17,6 @@ export class ListNotesComponent implements OnInit {
 
   constructor(
     private noteManager: NotesManagerService,
-    private router: Router
     ) {
     this.open_notes = [];
     this.inprocess_notes = [];
