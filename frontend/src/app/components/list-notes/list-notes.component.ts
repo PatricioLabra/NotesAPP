@@ -46,8 +46,13 @@ export class ListNotesComponent implements OnInit {
     });
   }
 
-  deleteNote(note: Note) {
-    //this.noteManager.removeNote(idNote);
-    console.log(note.id, note.state);
+  deleteNote(noteToDelete: Note) {
+    this.noteManager.removeNote(noteToDelete.id).subscribe((data: any) => {
+      switch (noteToDelete.state) {
+        case 'open': this.open_notes = this.open_notes.filter((note: Note) => note.id != noteToDelete.id); break;
+        case 'in_process': this.inprocess_notes = this.inprocess_notes.filter((note: Note) => note.id != noteToDelete.id); break;
+        case 'close': this.close_notes = this.close_notes.filter((note: Note) => note.id != noteToDelete.id); break;
+      }
+    });
   }
 }

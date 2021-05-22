@@ -18,7 +18,7 @@
   <p>In Process</p>
   <ul>
     <li
-      *ngFor="let note of open_notes"
+      *ngFor="let note of inprocess_notes"
       routerLink="/update-note/{{note.id}}"
       routerLinkActive="active"
     >
@@ -32,7 +32,7 @@
   <p>Close</p>
   <ul>
     <li
-      *ngFor="let note of open_notes"
+      *ngFor="let note of close_notes"
       routerLink="/update-note/{{note.id}}"
       routerLinkActive="active"
     >

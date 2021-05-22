@@ -30,7 +30,9 @@ export class UpdateNoteComponent implements OnInit {
   }
 
   processUpdatedNote(note: Note) {
-    console.log(note);
-    this.router.navigate(['list-notes']);
+    console.log('update note: ', note);
+    this.notesManager.updateNote(note).subscribe((data: any) => {
+      this.router.navigate(['list-notes']);
+    });
   }
 }
