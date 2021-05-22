@@ -1,0 +1,48 @@
+<div class="title-section">
+  <span>Mis Notas</span>
+</div>
+
+<div>
+  <div id="notes">
+    <p id="header">Open</p>
+    <ul id="note">
+      <li id="open" *ngFor="let note of open_notes" class="note-wrapper">
+      <div routerLink="/update-note/{{note.id}}" routerLinkActive="active" class="note-body">
+        <p id="title">{{ note.title }}</p>
+        <p id="description">{{note.description}}</p>
+      </div>
+        <span (click)="deleteNote(note)" class="delete-button">X</span>
+      </li>
+    </ul>
+  </div>
+
+  <div id="notes">
+    <p id="header">In Process</p>
+    <ul id="note">
+      <li id="inProcess" *ngFor="let note of inprocess_notes" class="note-wrapper">
+      <div routerLink="/update-note/{{note.id}}" routerLinkActive="active" class="note-body">
+        <p id="title" routerLink="/update-note/{{note.id}}" routerLinkActive="active">{{ note.title }}</p>
+        <p id="description">{{note.description}}</p>
+      </div>
+        <span (click)="deleteNote(note)" class="delete-button">X</span>
+      </li>
+    </ul>
+  </div>
+
+  <div id="notes">
+    <p id="header">Close</p>
+    <ul id="note">
+      <li id="close" *ngFor="let note of close_notes" class="note-wrapper">
+      <div class="note-body closed-notes">
+        <p id="title">{{ note.title }}</p>
+        <p id="description">{{note.description}}</p>
+      </div>
+        <span (click)="deleteNote(note)" class="delete-button">X</span>
+      </li>
+    </ul>
+  </div>
+
+  <p id="messageClic">Al dar clic sobre cada nota permitirá editar </p>
+</div>
+
+<app-footer></app-footer>

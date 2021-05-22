@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    margin: 0px auto;
+
+    span {
+      display: block;
+      margin-top: 10%;
+      font-size: 50px;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 400px;
+    padding: 50px;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 10% auto;
+
+    .submit-button {
+      align-self: flex-end;
+      width: 30%;
+      border: 1px solid;
+      margin-top: auto;
+    }
+
+    .mat-form-field {
+      margin: 10px;
+    }
+  }
+}
