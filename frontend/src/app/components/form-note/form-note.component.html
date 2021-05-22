@@ -1,7 +1,10 @@
 <p>form-note works!</p>
 
 <form [formGroup]="formNote" (ngSubmit)="onSubmit()">
-  <input type="text" formControlName="title" required>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input formControlName="title" type="text" matInput required>
+  </mat-form-field>
 
   <select formControlName="state" required>
     <option value="">Select state</option>
@@ -10,8 +13,10 @@
     <option value="close">Close</option>
   </select>
 
-  <!--TODO: change input to textArea (From angular material)-->
-  <input type="text" formControlName="description" required>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea formControlName="description" matInput required></textarea>
+  </mat-form-field>
 
   <button type="submit" [disabled]="!formNote.valid">{{ textSubmitButton }}</button>
 </form>
