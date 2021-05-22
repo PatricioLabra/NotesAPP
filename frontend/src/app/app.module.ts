@@ -10,6 +10,7 @@ import { CreateNoteComponent } from './components/create-note/create-note.compon
 import { ListNotesComponent } from '@components/list-notes/list-notes.component';
 import { UpdateNoteComponent } from './components/update-note/update-note.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from '@modules/angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    AngularMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
