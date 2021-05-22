@@ -1,10 +1,14 @@
+<div class="title">
+  <span>{{ textSubmitButton }} Note</span>
+</div>
+
 <form [formGroup]="formNote" (ngSubmit)="onSubmit()">
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Title</mat-label>
     <input formControlName="title" type="text" matInput required>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>State</mat-label>
     <mat-select formControlName="state" required>
       <mat-option value="">Select state</mat-option>
@@ -14,7 +18,7 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Description</mat-label>
     <textarea formControlName="description" matInput required></textarea>
   </mat-form-field>
