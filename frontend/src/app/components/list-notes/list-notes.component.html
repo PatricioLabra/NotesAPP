@@ -5,10 +5,11 @@
   <ul>
     <li
       *ngFor="let note of open_notes"
-      routerLink="/update-note/{{note.id}}"
-      routerLinkActive="active"
     >
-      {{ note.title }}
+      <p
+        routerLink="/update-note/{{note.id}}"
+        routerLinkActive="active"
+      >{{ note.title }}</p>
       <button (click)="deleteNote(note)">Eliminar</button>
     </li>
   </ul>
@@ -19,10 +20,11 @@
   <ul>
     <li
       *ngFor="let note of inprocess_notes"
-      routerLink="/update-note/{{note.id}}"
-      routerLinkActive="active"
     >
-      {{ note.title }}
+      <p
+        routerLink="/update-note/{{note.id}}"
+        routerLinkActive="active"
+      >{{ note.title }}</p>
       <button (click)="deleteNote(note)">Eliminar</button>
     </li>
   </ul>
@@ -33,10 +35,11 @@
   <ul>
     <li
       *ngFor="let note of close_notes"
-      routerLink="/update-note/{{note.id}}"
-      routerLinkActive="active"
     >
-      {{ note.title }}
+      <p
+        routerLink="/update-note/{{note.id}}"
+        routerLinkActive="active"
+      >{{ note.title }}</p>
       <button (click)="deleteNote(note)">Eliminar</button>
     </li>
   </ul>
