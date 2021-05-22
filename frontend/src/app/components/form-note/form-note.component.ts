@@ -43,7 +43,6 @@ export class FormNoteComponent implements OnInit {
   onSubmit() {
     // TODO: Validate data maybe, parse state (string to State)
     const note: Note = {...this.formNote.getRawValue(), 'id': this.id};
-    console.log(note);
     this.noteEntered.emit(note);
   }
 }

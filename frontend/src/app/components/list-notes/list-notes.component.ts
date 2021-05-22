@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesManagerService } from '@services/notes-manager.service';
-import { Router } from '@angular/router';
 
 import { Note } from '@models/note';
 import { State } from '@models/states';
@@ -18,7 +17,6 @@ export class ListNotesComponent implements OnInit {
 
   constructor(
     private noteManager: NotesManagerService,
-    private router: Router
     ) {
     this.open_notes = [];
     this.inprocess_notes = [];
@@ -48,8 +46,13 @@ export class ListNotesComponent implements OnInit {
     });
   }
 
-  deleteNote(note: Note) {
-    //this.noteManager.removeNote(idNote);
-    console.log(note.id, note.state);
+  deleteNote(noteToDelete: Note) {
+    this.noteManager.removeNote(noteToDelete.id).subscribe((data: any) => {
+      switch (noteToDelete.state) {
+        case 'open': this.open_notes = this.open_notes.filter((note: Note) => note.id != noteToDelete.id); break;
+        case 'in_process': this.inprocess_notes = this.inprocess_notes.filter((note: Note) => note.id != noteToDelete.id); break;
+        case 'close': this.close_notes = this.close_notes.filter((note: Note) => note.id != noteToDelete.id); break;
+      }
+    });
   }
 }

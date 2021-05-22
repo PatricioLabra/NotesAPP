@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotesManagerService } from '@services/notes-manager.service';
 
 import { Note } from '@models/note';
 
@@ -10,10 +11,14 @@ import { Note } from '@models/note';
 })
 export class CreateNoteComponent {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private notesManager: NotesManagerService
+    ) { }
 
   processNewNote(newNote: Note) {
-    console.log('from create note: ', newNote);
-    this.router.navigate(['list-notes']);
+    this.notesManager.addNote(newNote).subscribe((data: any) => {
+      this.router.navigate(['list-notes']);
+    });
   }
 }
