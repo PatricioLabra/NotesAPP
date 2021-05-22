@@ -6,12 +6,15 @@
     <input formControlName="title" type="text" matInput required>
   </mat-form-field>
 
-  <select formControlName="state" required>
-    <option value="">Select state</option>
-    <option value="open">Open</option>
-    <option value="in_process">In Process</option>
-    <option value="close">Close</option>
-  </select>
+  <mat-form-field>
+    <mat-label>State</mat-label>
+    <mat-select formControlName="state" required>
+      <mat-option value="">Select state</mat-option>
+      <mat-option value="open">Open</mat-option>
+      <mat-option value="in_process">In Process</mat-option>
+      <mat-option value="close">Close</mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <mat-form-field>
     <mat-label>Description</mat-label>
