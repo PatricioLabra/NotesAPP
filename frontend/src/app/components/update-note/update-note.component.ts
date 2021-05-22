@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
+import { NotesManagerService } from '@services/notes-manager.service';
 import { Note } from '@models/note';
+import { State } from '@models/states';
 
 @Component({
   selector: 'app-update-note',
@@ -10,13 +13,22 @@ import { Note } from '@models/note';
 export class UpdateNoteComponent implements OnInit {
 
   noteToUpdate: Note;
+  id: number;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private notesManager: NotesManagerService
+    ) {}
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.id;
+
+    this.notesManager.searchNote(this.id).subscribe((res: any) => {
+      this.noteToUpdate = res.data as Note;
+    });
   }
 
   processUpdatedNote(note: Note) {
-
+    console.log(note);
   }
 }
