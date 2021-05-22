@@ -11,6 +11,7 @@ import { ListNotesComponent } from '@components/list-notes/list-notes.component'
 import { UpdateNoteComponent } from './components/update-note/update-note.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from '@modules/angular-material/angular-material.module';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AngularMaterialModule } from '@modules/angular-material/angular-materia
     CreateNoteComponent,
     ListNotesComponent,
     UpdateNoteComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
