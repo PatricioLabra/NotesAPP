@@ -1,0 +1,9 @@
+<p>update-note works!</p>
+
+<app-form-note
+  (noteEntered)="processUpdatedNote($event)"
+  [textSubmitButton]="'Update'"
+  [title]="noteToUpdate.title"
+  [state]="noteToUpdate.state"
+  [description]="noteToUpdate.description"
+></app-form-note>
